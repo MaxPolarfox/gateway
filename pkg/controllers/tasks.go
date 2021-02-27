@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"github.com/MaxPolarfox/gateway/pkg/types"
+	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
 
@@ -21,7 +22,7 @@ func NewTasksController(tasksClient tasksClient.Client) *TasksController {
 	}
 }
 
-// AddTask POST /toDoList
+// AddTask POST /tasks
 func (c *TasksController) AddTask(rw http.ResponseWriter, req *http.Request) {
 	ctx := req.Context()
 	metricName := "TasksController.AddTask"
@@ -51,6 +52,54 @@ func (c *TasksController) AddTask(rw http.ResponseWriter, req *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	rw.WriteHeader(http.StatusCreated)
 	rw.Write(js)
+}
+
+// GetAllTasks GET /tasks
+func (c *TasksController) GetAllTasks(rw http.ResponseWriter, req *http.Request) {
+	ctx := req.Context()
+	metricName := "TasksController.GetAllTasks"
+
+	tasks, err := c.tasksClient.GetAllTasks(ctx)
+	if err != nil {
+		log.Println(metricName, "err", err)
+		RespondWithError(rw, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	js, err := json.Marshal(tasks)
+	if err != nil {
+		log.Println(metricName+".Marshal", "err", err)
+		RespondWithError(rw, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	rw.Header().Set("Content-Type", "application/json")
+	rw.WriteHeader(http.StatusCreated)
+	rw.Write(js)
+}
+
+// DeleteTask DELETE /tasks/:id
+func (c *TasksController) DeleteTask(rw http.ResponseWriter, req *http.Request) {
+	ctx := req.Context()
+	metricName := "TasksController.DeleteTask"
+
+	params := httprouter.ParamsFromContext(ctx)
+
+	taskID := params.ByName("id")
+
+	if len(taskID) == 0 {
+		RespondWithError(rw, http.StatusBadRequest, "no task id")
+	}
+
+	err := c.tasksClient.DeleteTask(ctx, taskID)
+	if err != nil {
+		log.Println(metricName+".tasksClient.DeleteTask", "err", err)
+		RespondWithError(rw, http.StatusNotFound, err.Error())
+		return
+	}
+
+	rw.Header().Set("Content-Type", "application/json")
+	rw.WriteHeader(http.StatusNoContent)
 }
 
 type Error struct {

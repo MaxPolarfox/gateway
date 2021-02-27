@@ -26,6 +26,8 @@ func NewService(options types.Options) *Service{
 
 	// Routes
 	router.HandlerFunc(http.MethodPost, "/tasks", tasksController.AddTask)
+	router.HandlerFunc(http.MethodGet, "/tasks", tasksController.GetAllTasks)
+	router.HandlerFunc(http.MethodDelete, "/tasks/:id", tasksController.DeleteTask)
 
 	return &Service{
 		Router: router,
