@@ -1,4 +1,16 @@
 {
     "serviceName": "gateway",
-    "port": 3007
+    "port": 3007,
+    "services": {
+        "tasks-rest": {
+            "url": "http://localhost:3006",
+            "retryCount": 1,
+            "timeoutMs": 10000
+        },
+        "tasks-grpc": {
+            "url": "localhost:3005",
+            "retryCount": 1,
+            "timeoutMs": 10000
+        }
+    }
 }

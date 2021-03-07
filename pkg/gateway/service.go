@@ -7,6 +7,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/MaxPolarfox/gateway/pkg/controllers"
 	grpcTasksClient "github.com/MaxPolarfox/tasks/pkg/grpc_client"
+	restTasksClient "github.com/MaxPolarfox/tasks-rest/pkg/rest_client"
 )
 
 type Service struct {
@@ -17,17 +18,23 @@ type Service struct {
 func NewService(options types.Options) *Service{
 
 	// Clients
-	grpcTasksClient := grpcTasksClient.NewTasksClient()
+	grpcTasksClient := grpcTasksClient.NewTasksClient(options.Services.TasksGrpc)
+	restTasksClient := restTasksClient.NewTasksClient(options.Services.TasksRest)
 
 	// Controllers
-	tasksController := controllers.NewGrpcTasksController(grpcTasksClient)
+	tasksGrpcController := controllers.NewGrpcTasksController(grpcTasksClient)
+	tasksRestController := controllers.NewRestTasksController(restTasksClient)
 
 	router := httprouter.New()
 
 	// Routes
-	router.HandlerFunc(http.MethodPost, "/grpc/tasks/", tasksController.AddTask)
-	router.HandlerFunc(http.MethodGet, "/grpc/tasks", tasksController.GetAllTasks)
-	router.HandlerFunc(http.MethodDelete, "/grpc/tasks/:id", tasksController.DeleteTask)
+	router.HandlerFunc(http.MethodPost, "/grpc/tasks/", tasksGrpcController.AddTask)
+	router.HandlerFunc(http.MethodGet, "/grpc/tasks", tasksGrpcController.GetAllTasks)
+	router.HandlerFunc(http.MethodDelete, "/grpc/tasks/:id", tasksGrpcController.DeleteTask)
+
+	router.HandlerFunc(http.MethodPost, "/rest/tasks/", tasksRestController.AddTask)
+	router.HandlerFunc(http.MethodGet, "/rest/tasks", tasksRestController.GetAllTasks)
+	router.HandlerFunc(http.MethodDelete, "/rest/tasks/:id", tasksRestController.DeleteTask)
 
 	return &Service{
 		Router: router,
