@@ -6,7 +6,7 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/MaxPolarfox/gateway/pkg/controllers"
-	tasksClient "github.com/MaxPolarfox/tasks/pkg/client"
+	grpcTasksClient "github.com/MaxPolarfox/tasks/pkg/grpc_client"
 )
 
 type Service struct {
@@ -17,17 +17,17 @@ type Service struct {
 func NewService(options types.Options) *Service{
 
 	// Clients
-	tasksClient := tasksClient.NewTasksClient()
+	grpcTasksClient := grpcTasksClient.NewTasksClient()
 
 	// Controllers
-	tasksController := controllers.NewTasksController(tasksClient)
+	tasksController := controllers.NewGrpcTasksController(grpcTasksClient)
 
 	router := httprouter.New()
 
 	// Routes
-	router.HandlerFunc(http.MethodPost, "/tasks", tasksController.AddTask)
-	router.HandlerFunc(http.MethodGet, "/tasks", tasksController.GetAllTasks)
-	router.HandlerFunc(http.MethodDelete, "/tasks/:id", tasksController.DeleteTask)
+	router.HandlerFunc(http.MethodPost, "/grpc/tasks/", tasksController.AddTask)
+	router.HandlerFunc(http.MethodGet, "/grpc/tasks", tasksController.GetAllTasks)
+	router.HandlerFunc(http.MethodDelete, "/grpc/tasks/:id", tasksController.DeleteTask)
 
 	return &Service{
 		Router: router,
