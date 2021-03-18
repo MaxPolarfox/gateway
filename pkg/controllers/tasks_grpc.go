@@ -8,7 +8,7 @@ import (
 	"log"
 	"net/http"
 
-	grpcTasksClient "github.com/MaxPolarfox/tasks/pkg/grpc_client"
+	grpcTasksClient "github.com/MaxPolarfox/tasks/pkg/client"
 )
 
 // GrpcTasksController handles GET, POST, DELETE, HEAD /grpc/tasks calls
@@ -23,10 +23,10 @@ func NewGrpcTasksController(tasksClient grpcTasksClient.Client) *GrpcTasksContro
 	}
 }
 
-// AddTask POST /tasks
-func (c *GrpcTasksController) AddTask(rw http.ResponseWriter, req *http.Request) {
+// CreateTask POST /tasks
+func (c *GrpcTasksController) CreateTask(rw http.ResponseWriter, req *http.Request) {
 	ctx := req.Context()
-	metricName := "GrpcTasksController.AddTask"
+	metricName := "GrpcTasksController.CreateTask"
 
 	body := types.AddTaskReqBody{}
 	err := json.NewDecoder(req.Body).Decode(&body)
@@ -36,7 +36,7 @@ func (c *GrpcTasksController) AddTask(rw http.ResponseWriter, req *http.Request)
 		return
 	}
 
-	res, err := c.grpcTasksClient.AddTask(ctx, body.Data)
+	res, err := c.grpcTasksClient.CreateTask(ctx, body.Data)
 	if err != nil {
 		log.Println(metricName, "err", err)
 		errors.RespondWithError(rw, http.StatusBadRequest, err.Error())
@@ -56,11 +56,11 @@ func (c *GrpcTasksController) AddTask(rw http.ResponseWriter, req *http.Request)
 }
 
 // GetAllTasks GET /tasks
-func (c *GrpcTasksController) GetAllTasks(rw http.ResponseWriter, req *http.Request) {
+func (c *GrpcTasksController) GetTasks(rw http.ResponseWriter, req *http.Request) {
 	ctx := req.Context()
-	metricName := "GrpcTasksController.GetAllTasks"
+	metricName := "GrpcTasksController.GetTasks"
 
-	tasks, err := c.grpcTasksClient.GetAllTasks(ctx)
+	tasks, err := c.grpcTasksClient.GetTasks(ctx)
 	if err != nil {
 		log.Println(metricName, "err", err)
 		errors.RespondWithError(rw, http.StatusBadRequest, err.Error())

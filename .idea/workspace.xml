@@ -2,15 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32c24383-32fd-4d88-9569-033f54d981aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pkg/controllers/tasks_rest.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/gateway/production.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deployment/k8s/gateway/gateway.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/gateway/development.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/gateway/development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gateway" beforeDir="false" afterPath="$PROJECT_DIR$/gateway" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/controllers/tasks_grpc.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/controllers/tasks_grpc.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/controllers/tasks_rest.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/controllers/tasks_rest.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/gateway/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/gateway/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/types/options.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/types/options.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,13 +49,14 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pkg/controllers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/pkg/controllers" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/config/gateway" />
+      <recent name="$PROJECT_DIR$/pkg/controllers" />
     </key>
   </component>
   <component name="RunManager">

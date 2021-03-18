@@ -1,0 +1,16 @@
+{
+    "serviceName": "gateway",
+    "port": 3007,
+    "services": {
+        "tasks-rest": {
+            "url": "http://tasks-rest:3006",
+            "retryCount": 1,
+            "timeoutMs": 10000
+        },
+        "tasks-grpc": {
+            "url": "tasks:3005",
+            "retryCount": 1,
+            "timeoutMs": 10000
+        }
+    }
+}

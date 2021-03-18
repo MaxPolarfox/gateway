@@ -25,10 +25,10 @@ func NewRestTasksController(tasksClient rest_client.Client) *RestTasksController
 	}
 }
 
-// AddTask POST /tasks
-func (c *RestTasksController) AddTask(rw http.ResponseWriter, req *http.Request) {
+// CreateTask POST /tasks
+func (c *RestTasksController) CreateTask(rw http.ResponseWriter, req *http.Request) {
 	ctx := req.Context()
-	metricName := "RestTasksController.AddTask"
+	metricName := "RestTasksController.CreateTask"
 
 	body := tasksTypes.AddTaskReqBody{}
 	err := json.NewDecoder(req.Body).Decode(&body)
@@ -57,10 +57,10 @@ func (c *RestTasksController) AddTask(rw http.ResponseWriter, req *http.Request)
 	rw.Write(js)
 }
 
-// GetAllTasks GET /tasks
-func (c *RestTasksController) GetAllTasks(rw http.ResponseWriter, req *http.Request) {
+// GetTasks GET /tasks
+func (c *RestTasksController) GetTasks(rw http.ResponseWriter, req *http.Request) {
 	ctx := req.Context()
-	metricName := "RestTasksController.GetAllTasks"
+	metricName := "RestTasksController.GetTasks"
 
 	tasks, err := c.restTasksClient.GetAllTasks(ctx)
 	if err != nil {

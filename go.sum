@@ -11,6 +11,8 @@ github.com/MaxPolarfox/tasks v1.0.5 h1:Gx14gm+6XnLn1pGf79jng6nwjQBWKltiW7IbQR5zV
 github.com/MaxPolarfox/tasks v1.0.5/go.mod h1:FZZ7wMA6wO48iwmLNJsvK8iiK0UktkKVCvxSeX2cxCg=
 github.com/MaxPolarfox/tasks v1.0.6 h1:V85H8sAgd0d5yMhTBgBF8M+A9vm27amq299tt9VWO1I=
 github.com/MaxPolarfox/tasks v1.0.6/go.mod h1:4LKUmEyYPXGvY3c0GPtHcSnr+QJohRhBsFS2Y4otUfE=
+github.com/MaxPolarfox/tasks v1.0.7 h1:BydLse4Fme/+LhA5LANRBbLQE30YJmjzK/gtGV3i4Ms=
+github.com/MaxPolarfox/tasks v1.0.7/go.mod h1:4LKUmEyYPXGvY3c0GPtHcSnr+QJohRhBsFS2Y4otUfE=
 github.com/MaxPolarfox/tasks-rest v0.0.0-20210307152221-f9892cd38a0e h1:K7DJzxRAjEIPD88nh6HG1bYK+41AhGqZT1ZkUVbjfus=
 github.com/MaxPolarfox/tasks-rest v1.0.1 h1:zVua/kPmnda1k8AH5YnKtQbomF9FlOc0kNoYG1Rrh2U=
 github.com/MaxPolarfox/tasks-rest v1.0.1/go.mod h1:NCDhHZwWgZBJHHd7DqLUwKsTqiYjA+5d3CVgyPYUs2Y=
